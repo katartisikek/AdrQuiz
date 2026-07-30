@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Εφαρμογή εξάσκησης για εξετάσεις ADR - Μεταφορά Επικίνδυνων Εμπορευμάτων. Τεστ Βασικής, Βυτίων, Εκρηκτικών και Ραδιενεργών ουσιών.">
+  <title>ADR Quiz - Εξέταση Επικίνδυνων Εμπορευμάτων</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== SCREEN 1: HOME ===== -->
+  <div id="screen-home" class="screen active">
+    <div class="home-bg"></div>
+    <header class="home-header">
+      <div class="logo-wrap">
+        <img src="kekLogo.png" alt="ΚΕΚ Τεχνικές Σχολές Επιμελητηρίου Ηρακλείου" class="kek-logo">
+        <div class="logo-divider"></div>
+        <div>
+          <h1 class="logo-title">ADR Quiz</h1>
+          <p class="logo-sub">Εξάσκηση Εξετάσεων</p>
+        </div>
+      </div>
+      <div class="home-badge">
+        <span class="badge-dot"></span>
+        <span>155 Ερωτήσεις</span>
+      </div>
+    </header>
+
+    <main class="home-main">
+      <section class="welcome-card">
+        <h2 class="welcome-title">Επίλεξε κατηγορία</h2>
+        <p class="welcome-desc">Κάθε τεστ περιέχει τυχαίες ερωτήσεις από την επιλεγμένη κατηγορία. Καλή εξάσκηση!</p>
+      </section>
+
+      <!-- GENERAL TEST -->
+      <section class="category-section">
+        <div class="section-label">
+          <span class="section-dot all"></span>
+          Γενικό Τεστ
+        </div>
+        <div class="cards-grid">
+          <div class="quiz-card card-general" id="btn-all" onclick="openChapterSelect('all')" role="button" tabindex="0">
+            <div class="card-img-wrap">
+              <img src="basiki.png" alt="Γενικό Τεστ ADR" class="card-img">
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Γενικό Τεστ</h3>
+              <p class="card-desc">Όλες οι κατηγορίες μαζί</p>
+              <div class="card-meta">
+                <span class="meta-badge">155 ερωτήσεις</span>
+                <span class="meta-count">25 ερωτήσεις / τεστ</span>
+              </div>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BY TOPIC -->
+      <section class="category-section">
+        <div class="section-label">
+          <span class="section-dot topic"></span>
+          Κατά Θέμα
+        </div>
+        <div class="cards-grid">
+
+          <div class="quiz-card card-basiko" id="btn-basiko" onclick="openChapterSelect('basiko')" role="button" tabindex="0">
+            <div class="card-img-wrap">
+              <img src="basiki.png" alt="Βασικό ADR" class="card-img">
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Βασικό</h3>
+              <p class="card-desc">Νομοθεσία, Μεταφορά, Ασφάλεια</p>
+              <div class="card-meta">
+                <span class="meta-badge">50 ερωτήσεις</span>
+                <span class="meta-count">20 ερωτήσεις / τεστ</span>
+              </div>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-vytia" id="btn-vytia" onclick="openChapterSelect('vytia')" role="button" tabindex="0">
+            <div class="card-img-wrap">
+              <img src="metaforaB.png" alt="Βυτία ADR" class="card-img">
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Βυτία</h3>
+              <p class="card-desc">Δεξαμενές &amp; Βυτιοφόρα Οχήματα</p>
+              <div class="card-meta">
+                <span class="meta-badge">60 ερωτήσεις</span>
+                <span class="meta-count">20 ερωτήσεις / τεστ</span>
+              </div>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-ekriktika" id="btn-ekriktika" onclick="openChapterSelect('ekriktika')" role="button" tabindex="0">
+            <div class="card-img-wrap">
+              <img src="metaforak1.png" alt="Εκρηκτικά Κλάση 1" class="card-img">
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Εκρηκτικά</h3>
+              <p class="card-desc">Κλάση 1 - Εκρηκτικές Ουσίες</p>
+              <div class="card-meta">
+                <span class="meta-badge">25 ερωτήσεις</span>
+                <span class="meta-count">15 ερωτήσεις / τεστ</span>
+              </div>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-radio" id="btn-radienerga" onclick="openChapterSelect('radienerga')" role="button" tabindex="0">
+            <div class="card-img-wrap">
+              <img src="metaforak7.png" alt="Ραδιενεργά Κλάση 7" class="card-img">
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">Ραδιενεργά</h3>
+              <p class="card-desc">Κλάση 7 - Ραδιενεργές Ουσίες</p>
+              <div class="card-meta">
+                <span class="meta-badge">20 ερωτήσεις</span>
+                <span class="meta-count">15 ερωτήσεις / τεστ</span>
+              </div>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- RENEWAL TESTS -->
+      <section class="category-section">
+        <div class="section-label">
+          <span class="section-dot renewal"></span>
+          Ανανεωτικό Πρόγραμμα
+        </div>
+        <div class="cards-grid renewal-grid" style="grid-template-columns: 1fr;">
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko'], 15)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π1</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π1 - Ανανέωση βασικής εκπαίδευσης</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό (15 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','ekriktika'], 30)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π2</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π2 - Ανανέωση βασικής εκπαίδευσης + κλάση 1</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό + Εκρηκτικά (30 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','radienerga'], 30)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π3</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π3 - Ανανέωση βασικής εκπαίδευσης + κλάση 7</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό + Ραδιενεργά (30 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','ekriktika','radienerga'], 45)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π4</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π4 - Ανανέωση βασικής εκπαίδευσης + κλάση 1 + κλάση 7</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό + Εκρηκτικά + Ραδιενεργά (45 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia'], 30)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π5</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π5 - Ανανέωση βασικής εκπαίδευσης + βυτία</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό + Βυτία (30 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','ekriktika'], 45)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π6</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π6 - Ανανέωση βασικής εκπαίδευσης + βυτία + κλάση 1</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό + Βυτία + Εκρηκτικά (45 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','radienerga'], 45)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π7</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π7 - Ανανέωση βασικής εκπαίδευσης + βυτία + κλάση 7</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό + Βυτία + Ραδιενεργά (45 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','ekriktika','radienerga'], 60)" role="button" tabindex="0">
+            <div class="card-icon-wrap small">
+              <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π8</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title small" style="margin-bottom: 2px;">Π8 - Ανανέωση βασικής εκπαίδευσης + βυτία + κλάση 1 + κλάση 7</h3>
+              <p class="card-desc small" style="color:var(--text-muted)">Βασικό + Βυτία + Εκρηκτικά + Ραδιενεργά (60 ερωτήσεις)</p>
+            </div>
+            <div class="card-arrow">&#8250;</div>
+          </div>
+
+        </div>
+      </section>
+
+      <footer class="home-footer">
+        <p>Βασισμένο στην ύλη ADR ανανεωτικού προγράμματος &bull; 155 Ερωτήσεις</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ===== SCREEN 1.5: CHAPTER SELECT ===== -->
+  <div id="screen-chapter" class="screen">
+    <div class="home-bg"></div>
+    <header class="home-header">
+      <div class="logo-wrap">
+        <img src="kekLogo.png" alt="ΚΕΚ Τεχνικές Σχολές Επιμελητηρίου Ηρακλείου" class="kek-logo">
+        <div class="logo-divider"></div>
+        <div>
+          <h1 class="logo-title">ADR Quiz</h1>
+          <p class="logo-sub">Εξάσκηση Εξετάσεων</p>
+        </div>
+      </div>
+      <button class="back-home-btn" onclick="goHome()" id="chapter-back-btn">
+        <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Πίσω
+      </button>
+    </header>
+
+    <main class="home-main" id="chapter-main">
+      <!-- Populated by JS -->
+    </main>
+  </div>
+
+  <!-- ===== SCREEN 2: QUIZ ===== -->
+  <div id="screen-quiz" class="screen">
+    <div class="quiz-header">
+      <button class="back-btn" id="quiz-back-btn" onclick="confirmExit()">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12l7 7M5 12l7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Έξοδος</span>
+      </button>
+      <div class="quiz-header-center">
+        <span class="quiz-category-label" id="quiz-category-label">Βασικό</span>
+      </div>
+      <div class="timer-wrap" id="timer-wrap">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span id="timer-display">00:00</span>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text">
+        <span id="progress-current">1</span> / <span id="progress-total">20</span>
+      </div>
+    </div>
+
+    <!-- Question navigation dots -->
+    <div class="q-nav" id="q-nav"></div>
+
+    <!-- Question card -->
+    <div class="question-area">
+      <div class="question-card" id="question-card">
+        <div class="q-chapter" id="q-chapter"></div>
+        <div class="q-text" id="q-text"></div>
+        <div class="options-list" id="options-list"></div>
+      </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="quiz-nav-btns">
+      <button class="nav-btn prev-btn" id="prev-btn" onclick="prevQuestion()">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Προηγούμενο
+      </button>
+      <button class="nav-btn next-btn" id="next-btn" onclick="nextQuestion()">
+        Επόμενο
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="nav-btn finish-btn" id="finish-btn" onclick="finishQuiz()" style="display:none">
+        Ολοκλήρωση
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 3: RESULTS ===== -->
+  <div id="screen-results" class="screen">
+    <div class="results-bg"></div>
+    <div class="results-content">
+      <div class="results-header">
+        <div class="results-emoji" id="results-emoji"></div>
+        <h2 class="results-title" id="results-title">Αποτέλεσμα</h2>
+        <div class="score-circle">
+          <svg viewBox="0 0 120 120" class="score-ring">
+            <circle class="score-ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="score-ring-fill" id="score-ring-fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="score-inner">
+            <span class="score-pct" id="score-pct">0%</span>
+            <span class="score-label">Επιτυχία</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-stats">
+        <div class="stat-card">
+          <div class="stat-num correct" id="stat-correct">0</div>
+          <div class="stat-label">Σωστές</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num wrong" id="stat-wrong">0</div>
+          <div class="stat-label">Λάθος</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num skipped" id="stat-skipped">0</div>
+          <div class="stat-label">Αναπάντητες</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num time-stat" id="stat-time">0:00</div>
+          <div class="stat-label">Χρόνος</div>
+        </div>
+      </div>
+
+      <div class="pass-fail-badge" id="pass-fail-badge"></div>
+
+      <button class="review-toggle-btn" id="review-toggle-btn" onclick="toggleReview()">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>
+        Προβολή Ερωτήσεων
+      </button>
+
+      <div class="review-list" id="review-list" style="display:none"></div>
+
+      <div class="results-actions">
+        <button class="action-btn retry-btn" id="retry-btn" onclick="retryQuiz()">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Νέο Τεστ
+        </button>
+        <button class="action-btn home-btn" id="home-btn" onclick="goHome()">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/></svg>
+          Αρχικό Μενού
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: EXIT CONFIRM ===== -->
+  <div class="modal-overlay" id="exit-modal" onclick="closeModal('exit-modal')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-icon">&#9888;&#65039;</div>
+      <h3 class="modal-title">Έξοδος από το Τεστ;</h3>
+      <p class="modal-desc">Η πρόοδός σου δεν θα αποθηκευτεί. Είσαι σίγουρος/η;</p>
+      <div class="modal-btns">
+        <button class="modal-btn cancel" onclick="closeModal('exit-modal')">Συνέχεια Τεστ</button>
+        <button class="modal-btn confirm" onclick="goHome()">Έξοδος</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="questions_embed.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
