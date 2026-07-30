@@ -132,7 +132,7 @@ function openChapterSelect(type) {
       <span class="chapter-quick-icon">▶</span>
       <div>
         <div class="chapter-quick-title">Τεστ Ολόκληρης Κατηγορίας</div>
-        <div class="chapter-quick-sub">${catData.allQuestions.length} ερωτήσεις &bull; ${cfg.defaultCount} τυχαίες / τεστ</div>
+        <div class="chapter-quick-sub">${cfg.defaultCount} τυχαίες / τεστ</div>
       </div>
     </div>
     <button class="chapter-start-btn" onclick="startQuiz('${type}', ${cfg.defaultCount})" style="background:${cfg.color}">
@@ -165,7 +165,6 @@ function openChapterSelect(type) {
     chHeader.innerHTML = `
       <span class="chapter-num" style="color:${cfg.color};border-color:${cfg.color}20;background:${cfg.color}10">${idx + 1}</span>
       <span class="chapter-name" onclick="startChapterQuiz('${type}', ${idx})" title="${displayName}">${displayName}</span>
-      <span class="chapter-q-count">${chQuestions.length} ερωτ.</span>
     `;
     chCard.appendChild(chHeader);
 
