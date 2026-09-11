@@ -19,6 +19,7 @@ let state = {
   lastRetryConfig: null,       // stores config for retry
   reviewOpen: false,
   chapterType: null,           // current category open in chapter select
+  showResultsMode: 'immediate', // 'immediate' = show right/wrong after answer, 'end' = show only at end
 };
 
 // ============================================
@@ -38,7 +39,7 @@ const CATEGORY_CONFIG = {
     desc: 'Νομοθεσία, Μεταφορά, Ασφάλεια',
     image: 'basiki.png',
     color: '#2563eb',
-    defaultCount: 20,
+    defaultCount: 25,
     chapterNames: [
       'Κεφάλαιο 1 - Νομοθετικό πλαίσιο – Ταξινόμηση επικινδύνων εμπορευμάτων',
       'Κεφάλαιο 2 - Είδη κινδύνων – Πρόληψη και αντιμετώπιση ατυχημάτων',
@@ -52,7 +53,7 @@ const CATEGORY_CONFIG = {
     desc: 'Δεξαμενές & Βυτιοφόρα Οχήματα',
     image: 'metaforaB.png',
     color: '#0891b2',
-    defaultCount: 20,
+    defaultCount: 15,
     chapterNames: [
       'Κεφάλαιο 1 - Δεξαμενή',
       'Κεφάλαιο 2 - Ειδικές προδιαγραφές βυτιοφόρων οχημάτων',
@@ -123,7 +124,7 @@ function openChapterSelect(type) {
   `;
   main.appendChild(hero);
 
-  // ── Quick start card ─────────────────────────────────────────
+  // ── Quick start card (Απόκτηση) ─────────────────────────────────────────
   const quickCard = document.createElement('div');
   quickCard.className = 'chapter-quick-card';
   quickCard.style.setProperty('--cat-color', cfg.color);
@@ -132,7 +133,7 @@ function openChapterSelect(type) {
       <span class="chapter-quick-icon">▶</span>
       <div>
         <div class="chapter-quick-title">Τεστ Ολόκληρης Κατηγορίας</div>
-        <div class="chapter-quick-sub">${cfg.defaultCount} τυχαίες / τεστ</div>
+        <div class="chapter-quick-sub">${cfg.defaultCount} τυχαίες / τεστ · Εξετάσεις Απόκτησης</div>
       </div>
     </div>
     <button class="chapter-start-btn" onclick="startQuiz('${type}', ${cfg.defaultCount})" style="background:${cfg.color}">
@@ -140,6 +141,24 @@ function openChapterSelect(type) {
     </button>
   `;
   main.appendChild(quickCard);
+
+  // ── Renewal quick card (Ανανέωση) ─────────────────────────────────────────
+  const renewalCard = document.createElement('div');
+  renewalCard.className = 'chapter-quick-card chapter-quick-card-renewal';
+  renewalCard.style.setProperty('--cat-color', '#f59e0b');
+  renewalCard.innerHTML = `
+    <div class="chapter-quick-left">
+      <span class="chapter-quick-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">♻</span>
+      <div>
+        <div class="chapter-quick-title">Τεστ Ανανέωσης</div>
+        <div class="chapter-quick-sub">15 τυχαίες / τεστ · Από όλα τα κεφάλαια</div>
+      </div>
+    </div>
+    <button class="chapter-start-btn" onclick="startRenewal(['${type}'], 15)" style="background:#f59e0b">
+      Έναρξη
+    </button>
+  `;
+  main.appendChild(renewalCard);
 
   // ── Chapter list ──────────────────────────────────────────────
   const section = document.createElement('div');
@@ -294,17 +313,46 @@ function startQuiz(type, count) {
 }
 
 function startRenewal(categories, count) {
-  let allQ = [];
-  for (const cat of categories) {
-    allQ = allQ.concat(QUIZ_DATA[cat].allQuestions);
+  const totalCount = count || 15; // Always 15 for renewals
+
+  // Collect question pools per category with their counts
+  const pools = categories.map(cat => ({
+    cat,
+    questions: QUIZ_DATA[cat].allQuestions,
+    total: QUIZ_DATA[cat].allQuestions.length,
+  }));
+
+  const grandTotal = pools.reduce((sum, p) => sum + p.total, 0);
+
+  // Proportional distribution: allocate questions proportionally to pool size
+  let remaining = Math.min(totalCount, grandTotal);
+  const allocations = pools.map(p => {
+    const raw = (p.total / grandTotal) * totalCount;
+    return { ...p, alloc: Math.floor(raw), frac: raw - Math.floor(raw) };
+  });
+
+  // Distribute the integer parts
+  let allocated = allocations.reduce((s, a) => s + a.alloc, 0);
+  remaining = Math.min(totalCount, grandTotal) - allocated;
+
+  // Distribute remainder by largest fractional parts
+  allocations.sort((a, b) => b.frac - a.frac);
+  for (let i = 0; i < remaining; i++) {
+    allocations[i].alloc++;
   }
 
+  // Select questions from each pool
+  let selected = [];
+  for (const a of allocations) {
+    const picked = shuffle(a.questions).slice(0, Math.min(a.alloc, a.total));
+    selected = selected.concat(picked);
+  }
+
+  const questions = shuffle(selected).map(q => shuffleOptions(q));
   const catNames = categories.map(c => QUIZ_DATA[c].category).join(' + ');
   const label = `Ανανεωτικό: ${catNames}`;
-  const selected = shuffle(allQ).slice(0, Math.min(count, allQ.length));
-  const questions = selected.map(q => shuffleOptions(q));
 
-  state.lastRetryConfig = { isRenewal: true, categories, count };
+  state.lastRetryConfig = { isRenewal: true, categories, count: totalCount };
   _initQuiz(questions, label);
 }
 
@@ -408,6 +456,8 @@ function renderQuestion(index) {
   optList.innerHTML = '';
   const letters = ['Α', 'Β', 'Γ', 'Δ'];
 
+  const isEndMode = state.showResultsMode === 'end';
+
   q.options.forEach((opt, oi) => {
     const item = document.createElement('div');
     item.className = 'option-item';
@@ -417,10 +467,18 @@ function renderQuestion(index) {
     // Apply state if already answered
     const answered = ans.selectedIdx !== null;
     if (answered) {
-      if (opt.correct) {
-        item.classList.add('correct');
-      } else if (oi === ans.selectedIdx) {
-        item.classList.add('wrong');
+      if (isEndMode) {
+        // In "end" mode, only highlight the selected option without revealing correct/wrong
+        if (oi === ans.selectedIdx) {
+          item.classList.add('selected-end');
+        }
+      } else {
+        // Immediate mode: show correct/wrong
+        if (opt.correct) {
+          item.classList.add('correct');
+        } else if (oi === ans.selectedIdx) {
+          item.classList.add('wrong');
+        }
       }
     } else if (oi === ans.selectedIdx) {
       item.classList.add('selected');
@@ -437,7 +495,7 @@ function renderQuestion(index) {
     item.appendChild(letterSpan);
     item.appendChild(textSpan);
 
-    if (answered) {
+    if (answered && !isEndMode) {
       const icon = document.createElement('span');
       icon.className = 'option-result-icon';
       icon.textContent = opt.correct ? '✓' : (oi === ans.selectedIdx ? '✗' : '');
@@ -506,8 +564,16 @@ function selectAnswer(optionIndex) {
   // Re-render to show result
   renderQuestion(state.currentIndex);
 
-  // Auto-advance after 1.2 seconds if correct, 1.8 if wrong
-  const delay = isCorrect ? 1100 : 1700;
+  // Determine delay based on mode
+  let delay;
+  if (state.showResultsMode === 'end') {
+    // In "end" mode, advance quickly since no feedback is shown
+    delay = 500;
+  } else {
+    // Immediate mode: 1.1s if correct, 3.5s if wrong (extra time to study the correct answer)
+    delay = isCorrect ? 1100 : 3500;
+  }
+
   setTimeout(() => {
     if (state.currentIndex < state.questions.length - 1) {
       navigateTo(state.currentIndex + 1);
@@ -740,6 +806,28 @@ function closeModal(id) {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeModal('exit-modal');
 });
+
+// ============================================
+// RESULTS MODE TOGGLE
+// ============================================
+
+function toggleResultsMode() {
+  const immediateEl = getEl('toggle-immediate');
+  const endEl = getEl('toggle-end');
+  const slider = getEl('toggle-slider');
+
+  if (state.showResultsMode === 'immediate') {
+    state.showResultsMode = 'end';
+    immediateEl.classList.remove('active');
+    endEl.classList.add('active');
+    slider.classList.add('right');
+  } else {
+    state.showResultsMode = 'immediate';
+    endEl.classList.remove('active');
+    immediateEl.classList.add('active');
+    slider.classList.remove('right');
+  }
+}
 
 // ============================================
 // INIT

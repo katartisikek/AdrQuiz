@@ -1464,3 +1464,96 @@ body {
   filter: brightness(1.08);
   box-shadow: 0 3px 12px color-mix(in srgb, var(--cat-color) 45%, transparent);
 }
+
+/* ============================================
+   RESULTS MODE TOGGLE
+   ============================================ */
+.results-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.toggle-switch-wrap {
+  position: relative;
+  display: flex;
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 3px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid var(--border);
+  min-width: 190px;
+}
+
+.toggle-option {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  text-align: center;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 8px;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.toggle-option.active {
+  color: var(--accent-blue);
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  height: calc(100% - 6px);
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.15), 0 1px 3px rgba(0,0,0,0.08);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-slider.right {
+  transform: translateX(100%);
+}
+
+/* ============================================
+   SELECTED-END MODE OPTION STYLE
+   ============================================ */
+.option-item.selected-end {
+  border-color: var(--accent-blue);
+  background: rgba(59,130,246,0.06);
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+}
+.option-item.selected-end .option-letter {
+  background: var(--accent-blue);
+  color: white;
+}
+
+/* ============================================
+   RENEWAL QUICK CARD IN CHAPTER SELECT
+   ============================================ */
+.chapter-quick-card-renewal {
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.04) 0%, rgba(255, 255, 255, 0.95) 100%);
+}
+.chapter-quick-card-renewal:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.12);
+}

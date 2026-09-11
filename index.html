@@ -41,6 +41,14 @@
       <section class="welcome-card" style="display:flex; flex-direction:column; align-items:center; text-align:center;">
         <h2 class="welcome-title">Επίλεξε κατηγορία</h2>
         <p class="welcome-desc">Κάθε τεστ περιέχει τυχαίες ερωτήσεις από την επιλεγμένη κατηγορία. Καλή εξάσκηση!</p>
+        <div class="results-mode-toggle">
+          <span class="toggle-label">Αποτέλεσμα:</span>
+          <div class="toggle-switch-wrap" id="results-mode-toggle" onclick="toggleResultsMode()">
+            <span class="toggle-option active" id="toggle-immediate">Άμεσο</span>
+            <span class="toggle-option" id="toggle-end">Στο τέλος</span>
+            <div class="toggle-slider" id="toggle-slider"></div>
+          </div>
+        </div>
       </section>
 
       <!-- GENERAL TEST -->
@@ -67,7 +75,7 @@
       <section class="category-section">
         <div class="section-label">
           <span class="section-dot topic"></span>
-          Κατά Θέμα
+          Κατά Θέμα – Εξετάσεις Απόκτησης
         </div>
         <div class="cards-grid">
 
@@ -137,7 +145,7 @@
             <div class="card-arrow">&#8250;</div>
           </div>
 
-          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','ekriktika'], 30)" role="button" tabindex="0">
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','ekriktika'], 15)" role="button" tabindex="0">
             <div class="card-icon-wrap small">
               <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π2</span>
             </div>
@@ -148,7 +156,7 @@
             <div class="card-arrow">&#8250;</div>
           </div>
 
-          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','radienerga'], 30)" role="button" tabindex="0">
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','radienerga'], 15)" role="button" tabindex="0">
             <div class="card-icon-wrap small">
               <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π3</span>
             </div>
@@ -159,7 +167,7 @@
             <div class="card-arrow">&#8250;</div>
           </div>
 
-          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','ekriktika','radienerga'], 45)" role="button" tabindex="0">
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','ekriktika','radienerga'], 15)" role="button" tabindex="0">
             <div class="card-icon-wrap small">
               <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π4</span>
             </div>
@@ -170,7 +178,7 @@
             <div class="card-arrow">&#8250;</div>
           </div>
 
-          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia'], 30)" role="button" tabindex="0">
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia'], 15)" role="button" tabindex="0">
             <div class="card-icon-wrap small">
               <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π5</span>
             </div>
@@ -181,7 +189,7 @@
             <div class="card-arrow">&#8250;</div>
           </div>
 
-          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','ekriktika'], 45)" role="button" tabindex="0">
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','ekriktika'], 15)" role="button" tabindex="0">
             <div class="card-icon-wrap small">
               <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π6</span>
             </div>
@@ -192,7 +200,7 @@
             <div class="card-arrow">&#8250;</div>
           </div>
 
-          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','radienerga'], 45)" role="button" tabindex="0">
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','radienerga'], 15)" role="button" tabindex="0">
             <div class="card-icon-wrap small">
               <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π7</span>
             </div>
@@ -203,7 +211,7 @@
             <div class="card-arrow">&#8250;</div>
           </div>
 
-          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','ekriktika','radienerga'], 60)" role="button" tabindex="0">
+          <div class="quiz-card card-renewal" onclick="startRenewal(['basiko','vytia','ekriktika','radienerga'], 15)" role="button" tabindex="0">
             <div class="card-icon-wrap small">
               <span style="font-weight:900; font-size:1.1rem; color:var(--accent-blue)">Π8</span>
             </div>
